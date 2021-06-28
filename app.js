@@ -3,17 +3,11 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-
-var app = express();
-
 const mongoose = require( 'mongoose' );
-//mongoose.connect( `mongodb+srv://${auth.atlasAuth.username}:${auth.atlasAuth.password}@cluster0-yjamu.mongodb.net/authdemo?retryWrites=true&w=majority`);
+const layouts = require("express-ejs-layouts");
+
 mongoose.connect( 'mongodb://localhost/authDemo');
-//const mongoDB_URI = process.env.MONGODB_URI
-//mongoose.connect(mongoDB_URI)
+
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -21,35 +15,30 @@ db.once('open', function() {
   console.log("we are connected!!!")
 });
 
-// Here we specify that we will be using EJS as our view engine
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs");
+const User = require('./models/User');
 
-// Here we process the requests so they are easy to handle
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+const authRouter = require('./routes/authentication');
+const isLoggedIn = authRouter.isLoggedIn
 
-const employeeRouter = require('./routes/employee');
-const employerRouter = require('./routes/employer');
-app.get("/", (req, res) => {
-  res.render("index");
-});
-app.use('/employees' ,employeeRouter);
-app.use('/employers' ,employerRouter);
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+
+var app = express();
+
+//<a href=“/match/<%= employee._id %>”> employee.name </a>
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.get("/about", (request, response) => {
-  response.render("about");
-});
+app.use(layouts);
+app.use(authRouter)
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

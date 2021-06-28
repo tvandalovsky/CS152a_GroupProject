@@ -6,22 +6,20 @@
         <h3> Employee information
          </h3>
     </div>
-              <form method="post" action="/employees">
-                  <input type="text" name="name" size="100"> Name <br>
-                  <input type="text" name="schoolGrauatedFrom" size="100"> School graduate from<br>
-                  <input type="text" name="linkdinLink" size="100"> Linkdin Link<br>
-                  <input type="text" name="picture" size="100"> Picture<br>
-                  <input type="number" name="yearGraduated" size="100"> Enter the year you graduated<br>
-                  <input type="submit" value="press when pomodoro is completed (about 30 minutes)">
-              </form>
-
-
-              <div class="col bg-danger">
-                  <% employees.forEach(employee => { %>
-                    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-indicators"> 
-                          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="<%= employee.name%>"></button>
-                        </div>
+    <form method="post" action="/employees">
+      <input type="text" name="name" size="100"> Name <br>
+      <input type="text" name="schoolGrauatedFrom" size="100"> School graduate from<br>
+      <input type="text" name="linkdinLink" size="100"> Linkdin Link<br>
+      <input type="text" name="picture" size="100"> Picture<br>
+      <input type="number" name="yearGraduated" size="100"> Enter the year you graduated<br>
+      <input type="submit" value="press when pomodoro is completed (about 30 minutes)">
+    </form>
+    <div class="col bg-danger">
+        <% employees.forEach(employee => { %>
+          <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="<%= employee.name%>"></button>
+              </div>
                         <div class="carousel-inner">
                           <div class="carousel-item active">
                             <img src="<%= employee.picture%>" class="d-block w-100" alt="<%= employee.name%>">

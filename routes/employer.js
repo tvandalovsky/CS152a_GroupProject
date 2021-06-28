@@ -35,3 +35,6 @@ router.post('/',
       //res.render("todoVerification")
       res.redirect('/employers')
 });
+
+
+module.exports = router;

@@ -9,8 +9,6 @@ var userSchema = Schema( {
   googletoken: String,
   googlename:String,
   googleemail:String,
-  username:String,
-  position:String,
 } );
 
 module.exports = mongoose.model( 'User', userSchema );

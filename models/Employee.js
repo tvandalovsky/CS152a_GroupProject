@@ -11,7 +11,7 @@ var employeeSchema = Schema( {
   picture:String,
   desiredPosition:String,
   yearGraduated:Number,
-  skills:String;
+  skills:String
 } );
 
 module.exports = mongoose.model( 'Employee', employeeSchema );
