@@ -31,10 +31,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 const employeeRouter = require('./routes/employee');
+const employerRouter = require('./routes/employer');
 app.get("/", (req, res) => {
   res.render("index");
 });
 app.use('/employees' ,employeeRouter);
+app.use('/employers' ,employerRouter);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
