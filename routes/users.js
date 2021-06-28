@@ -6,4 +6,11 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
+router.post('/',
+  async (req, res, next) => {
+    await todo.save();
+
+    res.redirect('/todo')
+});
+
 module.exports = router;

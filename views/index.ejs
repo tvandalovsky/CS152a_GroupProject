@@ -4,5 +4,17 @@
     <div class="jumbotron">
         <h1>Index Tester</h1>
         <h3> app routing works </h3>
+
     </div>
 </div>
+<% if (loggedIn) { %>
+  <%= user.googlename  %> sign up as an employer or employee
+  <%=user.isEmployee = true %>
+  <form method="post" action="/employeeEmployeer" class="bg-info">
+    Would you like to sign up as an employeer or employee?<br>
+          Employer <input type="radio" name="isEmployee" value="true"><br>
+          Employee <input type="radio" name="isEmployee" value="false"><br>
+            <input type="submit" value="Submit">
+  </form>
+
+  <% } %>
