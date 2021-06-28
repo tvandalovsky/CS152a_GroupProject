@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 //var userSchema = mongoose.Schema( {any:{}})
 
 var employeeSchema = Schema( {
+  name: String,
   schoolGraduatedFrom: String,
   linkdinLink: String,
   picture:String,
