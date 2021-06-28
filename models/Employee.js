@@ -8,10 +8,11 @@ var employeeSchema = Schema( {
   name: String,
   schoolGraduatedFrom: String,
   linkdinLink: String,
-  picture:String,
-  desiredPosition:String,
-  yearGraduated:Number,
-  skills:String
+  picture: String,
+  desiredPosition: String,
+  yearGraduated: Number,
+  skills: String,
+  resume: GridFS,
 } );
 
 module.exports = mongoose.model( 'Employee', employeeSchema );
