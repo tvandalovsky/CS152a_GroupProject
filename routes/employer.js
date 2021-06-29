@@ -23,7 +23,7 @@ router.post('/',
   async (req, res, next) => {
       const employer = new Employers(
         {
-<<<<<<< HEAD
+/*
         name: req.body.name,
          companyName: req.body.cpmpanyName,
          companyWebsite: req.body.cpmpanyWebsite,
@@ -31,7 +31,7 @@ router.post('/',
           positionLookingFor: req.body.positionLookingFor,
           salaryEstimate: req.body.salaryEstimate,
           userId : req.user._id
-=======
+*/
         name:req.body.name,
          companyName:req.body.cpmpanyName,
          companyWebsite:req.body.cpmpanyWebsite,
@@ -40,9 +40,9 @@ router.post('/',
           salaryEstimate:req.body.salaryEstimate,
           userId :req.user._id,
           EmployeeMatches: req.body.matches
->>>>>>> 49d9eafa30fca73f162c6cea288847192e7bc6ed
+
         })
-        const employer = new Employer(employers)
+        //const employer = new Employer(employers)
         await employer.save();
         //res.render("todoVerification")
         res.redirect('/employers')

@@ -90,8 +90,8 @@ app.post('/matchWith',
 async (req,res,next) => {
   try {
     if(matchWith === 'yes'){
-      const employer=await Employer.find({req.user._id});
-      const employeeID=req.body.EmployeeID
+      const employer = await Employer.find({userId: req.user._id});
+      const employeeID = req.body.EmployeeID
       employer.employeeMatches.push(employeeID)
       const eomployerId=employer._id
       const employee=await Employer.find({employeeID});
