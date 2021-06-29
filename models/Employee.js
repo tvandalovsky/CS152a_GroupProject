@@ -12,7 +12,7 @@ var employeeSchema = Schema( {
   desiredPosition: String,
   yearGraduated: Number,
   skills: String,
-  userID: ObjectId
+  userId: ObjectId
 //  resume: GridFS,
 //  matches:[]
 } );
