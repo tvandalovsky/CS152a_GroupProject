@@ -12,8 +12,9 @@ var employeeSchema = Schema( {
   desiredPosition: String,
   yearGraduated: Number,
   skills: String,
+  userID: ObjectId
 //  resume: GridFS,
-  matches:[]
+//  matches:[]
 } );
 
 module.exports = mongoose.model( 'Employee', employeeSchema );

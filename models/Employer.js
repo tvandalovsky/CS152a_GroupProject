@@ -11,7 +11,8 @@ var employerSchema = Schema( {
   picture:String,
   positionLookingFor:String,
   salaryEstimate:Number,
-  matches:[]
+  userId: ObjectID
+  //matches:[]
 } );
 
 module.exports = mongoose.model( 'Employer', employerSchema );

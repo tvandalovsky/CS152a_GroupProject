@@ -81,6 +81,21 @@ async (req,res,next) => {
     next(error)
   }
 });
+
+app.post('/matchWith',
+async (req,res,next) => {
+  try {
+    if(matchWith === 'yes'){
+      req.body.employeeID=employeeNum;
+      req.body.employerID=employerNum
+      await req.match.save()
+      res.render('matches')
+    }
+
+  } catch (error) {
+    next(error)
+  }
+});
 //catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

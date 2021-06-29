@@ -30,6 +30,7 @@ router.post('/',
           picture:req.body.picture,
           positionLookingFor:req.body.positionLookingFor,
           salaryEstimate:req.body.salaryEstimate,
+          userId :req.user._id
         })
       await employees.save();
       //res.render("todoVerification")
