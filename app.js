@@ -69,12 +69,16 @@ async (req,res,next) => {
       req.user.isEmployee = isEmployee
       await req.user.save()
       console.log(req.user.isEmployee);
+      res.locals.employees = await User.find({isEmployee:true});
+      console.log('employees length='+JSON.stringify(res.locals.employees.length));
       res.render('employees')
     }
     else if(isEmployee === 'false') {
       req.user.isEmployee = isEmployee
       await req.user.save()
       console.log(req.user.isEmployee);
+      res.locals.employers = await User.find({isEmployee:false});
+      console.log('employers length='+JSON.stringify(res.locals.employers.length));
       res.render('employer')
     }
   } catch (error) {
