@@ -1,0 +1,45 @@
+<%- include('bootheader') -%>
+
+<div class="bg-light" >
+    <div class="jumbotron">
+        <h1>Employers</h1>
+        <h3> Employer information
+         </h3>
+    </div>
+              <form method="post" action="employer">
+                  <input type="text" name="name" size="100"> Name<br>
+                  <input type="text" name="companyNae" size="100"> Linkdin Link<br>
+                  <input type="text" name="picture" size="100"> Picture<br>
+                  <input type="number" name="yearGraduated" size="100"> Enter the year you graduated<br>
+                  <input type="submit" value="press when pomodoro is completed (about 30 minutes)">
+              </form>
+
+
+              <div class="col bg-danger">
+                  <% employers.forEach(employer => { %>
+                    <h1> Employer inforation </h1>
+                  <%= employer.name%> : <img width="400"  src="<%= employee.picture %>">
+                    Company Name:  <%= employer.companyName%>
+                      Comapny Webiste: <a href="<%= employer.companyWebsiteLink%>" >
+                  Position Looking For: <%= employer.positionLookingFor%>
+                    Salary Estimate:  <%= employer.salaryEstimate%>
+
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                          Company Websites
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                          <li><a class="dropdown-item" href="#<%= employer.companyWebsiteLink%>"><%= employer.companyName%></a></li>
+                        </ul>
+                    </div>
+
+
+                  <% }) %>
+                </div>
+
+
+
+
+
+
+<%- include('bootfooter') -%>
