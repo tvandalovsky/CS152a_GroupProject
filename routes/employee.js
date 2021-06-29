@@ -29,7 +29,8 @@ router.post('/',
           picture:req.body.picture,
           yearGraduated:req.body.yearGraduated,
           skills:req.body.skills,
-          userId :req.user._id
+          userId :req.user._id,
+          EmployerMatches: req.body.matches
         })
       await employees.save();
       //res.render("todoVerification")
