@@ -61,6 +61,20 @@ app.get('/login', (request,response) => {
   response.render("views/matches.ejs")
 });
 
+app.get('/employeeGet', (req,res) => {
+  req.user.isEmployee = isEmployee
+  req.user.save()
+  console.log(req.user.isEmployee);
+  res.locals.employees = User.find({isEmployee:true});
+  console.log('employees length='+JSON.stringify(res.locals.employees.length));
+  res.render("employees")
+});
+
+app.get('/employerGet', (req,res) => {
+  res.render("employers")
+});
+
+
 app.post('/employeeEmployeer',
 async (req,res,next) => {
   try {
@@ -144,9 +158,41 @@ app.post('/employeeRouter',
       //res.render("todoVerification")
       res.render('matches')
 });
+/*
+router.get('/',
+  //isLoggedIn,
+  async (req, res, next) => {
+    try{
+      res.locals.allEmployees= await Employess.find({})
+      res.render('employees');
+    }catch(err){
+      console.log('Error in  employee')
+            console.dir(err)
+            next(err)
+    }
 
-///////////////
-//catch 404 and forward to error handler
+});
+
+
+router.post('/',
+
+  async (req, res, next) => {
+      const employees = new Employee(
+        { name:req.body.name,
+          schoolGraduatedFrom:req.body.schoolGraduatedFrom,
+         linkdinLink:req.body.linkdinLink,
+          picture:req.body.picture,
+          yearGraduated:req.body.yearGraduated,
+          skills:req.body.skills,
+          userId :req.user._id,
+          EmployerMatches: req.body.matches
+        })
+      await employees.save();
+      //res.render("todoVerification")
+      res.redirect('/employees')
+});
+*/
+
 app.use(function(req, res, next) {
   next(createError(404));
 });
@@ -160,5 +206,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
+
 
 module.exports = app;
