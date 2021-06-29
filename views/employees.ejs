@@ -43,12 +43,12 @@
                    <%= employee.schoolGrauatedFrom%></a>
                     Year Graduate:Graduated From:  <%= employee.yearGraduated%>
                     <% if (loggedIn && !user.isEmployee) { %>
-                      <%= const employerNum=await Employer.find({userId:req.user._id}) %>
                       <%= user.googlename  %> sign up as an employer or employee
                       <form method="post" action="/matchWith" class="bg-info">
                         Would you like to match with this employee<br>
                               Employer <input type="radio" name="matchWith" value="yes"><br>
                               Employee <input type="radio" name="matchWith" value="no"><br>
+                              <input type="hidden" name="employeeId" value="<%= employee._id%>"><br>
                                 <input type="submit" value="Submit">
                       </form>
                       <% } %>
