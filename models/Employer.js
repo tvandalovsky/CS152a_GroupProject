@@ -7,7 +7,7 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 var employerSchema = Schema( {
   name:String,
   companyName: String,
-  comanyWebsiteLink: String,
+  companyWebsiteLink: String,
   picture:String,
   positionLookingFor:String,
   salaryEstimate:Number,

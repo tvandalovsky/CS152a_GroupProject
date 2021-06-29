@@ -25,8 +25,8 @@ const isLoggedIn = authRouter.isLoggedIn
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-var employeeRouter = require('./routes/employee');
-var employerRouter = require('./routes/employer');
+//var employeeRouter = require('./routes/employee');
+//var employerRouter = require('./routes/employer');
 
 var app = express();
 
@@ -103,6 +103,49 @@ async (req,res,next) => {
     next(error)
   }
 });
+
+
+///////////////////
+app.post('/employerRouter',
+  async (req, res, next) => {
+      const employer = new Employer(
+        {
+         name:req.body.name,
+         companyName:req.body.companyName,
+         companyWebsite:req.body.companyWebsiteLink,
+          picture:req.body.picture,
+          positionLookingFor:req.body.positionLookingFor,
+          salaryEstimate:req.body.salaryEstimate,
+          userId :req.user._id,
+          EmployeeMatches: req.body.matches
+        })
+        //const employer = new Employer(employers)
+        await employer.save();
+        //res.render("todoVerification")
+        res.render('matches')
+});
+
+
+/////////////////
+app.post('/employeeRouter',
+
+  async (req, res, next) => {
+      const employees = new Employee(
+        { name:req.body.name,
+          schoolGraduatedFrom:req.body.schoolGraduatedFrom,
+         linkdinLink:req.body.linkdinLink,
+          picture:req.body.picture,
+          yearGraduated:req.body.yearGraduated,
+          skills:req.body.skills,
+          userId :req.user._id,
+          EmployerMatches: req.body.matches
+        })
+      await employees.save();
+      //res.render("todoVerification")
+      res.render('matches')
+});
+
+///////////////
 //catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

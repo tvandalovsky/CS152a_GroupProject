@@ -6,13 +6,15 @@
         <h3> Employee information
          </h3>
     </div>
-    <form method="post" action="/employees">
+    <form method="post" action="/employeeRouter">
       <input type="text" name="name" size="100"> Name <br>
       <input type="text" name="schoolGrauatedFrom" size="100"> School graduate from<br>
       <input type="text" name="linkdinLink" size="100"> Linkdin Link<br>
       <input type="text" name="picture" size="100"> Picture<br>
       <input type="number" name="yearGraduated" size="100"> Enter the year you graduated<br>
-      <input type="submit" value="press when pomodoro is completed (about 30 minutes)">
+      <input type="hidden" name=“userId" value="<%= user._id %>"><br>
+      <input type = "hidden" name = "employerMatches" value = "[]" >
+      <input type="submit" value="Submit (Employee)">
     </form>
     <div class="col bg-danger">
         <% employees.forEach(employee => { %>

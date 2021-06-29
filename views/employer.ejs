@@ -6,12 +6,16 @@
         <h3> Employer information
          </h3>
     </div>
-              <form method="post" action="employer">
-                  <input type="text" name="name" size="100"> Name<br>
-                  <input type="text" name="companyNae" size="100"> Linkdin Link<br>
+              <form method="post" action="/employerRouter">
+                  <input type="text" name="companyName" size="100">Company Name<br>
+                  <input type="text" name="companyWebsiteLink" size="100">Company Website<br>
                   <input type="text" name="picture" size="100"> Picture<br>
+                  <input type="text" name="positionLookingFor" size="100"> Position looking for<br>
+                  <input type="number" name="salaryEstimate" size="100"> Salary Estimate<br>
                   <input type="number" name="yearGraduated" size="100"> Enter the year you graduated<br>
-                  <input type="submit" value="press when pomodoro is completed (about 30 minutes)">
+                  <input type="hidden" name=“userId" value="<%= user._id %>"><br>
+                  <input type = "hidden" name = "employeeMatches" value = "[]" >
+                  <input type="submit" value="Submit (Employer)">
               </form>
 
 
