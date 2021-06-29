@@ -20,21 +20,21 @@ router.get('/',
 
 
 router.post('/',
-
   async (req, res, next) => {
-      const employers = new Employers(
+      const employer = new Employers(
         {
-        name:req.body.name,
-         companyName:req.body.cpmpanyName,
-         companyWebsite:req.body.cpmpanyWebsite,
-          picture:req.body.picture,
-          positionLookingFor:req.body.positionLookingFor,
-          salaryEstimate:req.body.salaryEstimate,
-          userId :req.user._id
+        name: req.body.name,
+         companyName: req.body.cpmpanyName,
+         companyWebsite: req.body.cpmpanyWebsite,
+          picture: req.body.picture,
+          positionLookingFor: req.body.positionLookingFor,
+          salaryEstimate: req.body.salaryEstimate,
+          userId : req.user._id
         })
-      await employees.save();
-      //res.render("todoVerification")
-      res.redirect('/employers')
+        const employer = new Employer(employers)
+        await employer.save();
+        //res.render("todoVerification")
+        res.redirect('/employers')
 });
 
 
