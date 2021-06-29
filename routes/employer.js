@@ -8,7 +8,7 @@ router.get('/',
   //isLoggedIn,
   async (req, res, next) => {
     try{
-      res.locals.allEmployers= await Employers.find({})
+      res.locals.allEmployers= await Employer.find({})
       res.render('employers');
     }catch(err){
       console.log('Error in  employer')

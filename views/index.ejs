@@ -31,12 +31,12 @@
 
    <% if (user.isEmployee) { %>
     <%= user.googlename  %> Fill out your employee information:
-         <a class="nav-link" href="/employeeGet" > Employee Info </a>
+         <a class="nav-link" href="/employees" > Employee Info </a>
   <% }   %>
 
   <% if (!user.isEmployee) { %>
    <%= user.googlename  %> Fill out your employee information:
-        <a class="nav-link" href="/employerGet" > Employer Info </a>
+        <a class="nav-link" href="/employerRouter" > Employer Info </a>
  <% }   %>
 
 <% } %>

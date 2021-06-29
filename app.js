@@ -62,11 +62,6 @@ app.get('/login', (request,response) => {
 });
 
 app.get('/employeeGet', (req,res) => {
-  req.user.isEmployee = isEmployee
-  req.user.save()
-  console.log(req.user.isEmployee);
-  res.locals.employees = User.find({isEmployee:true});
-  console.log('employees length='+JSON.stringify(res.locals.employees.length));
   res.render("employees")
 });
 
@@ -158,12 +153,12 @@ app.post('/employeeRouter',
       //res.render("todoVerification")
       res.render('matches')
 });
-/*
-router.get('/',
+
+app.get('/employeeRouter',
   //isLoggedIn,
   async (req, res, next) => {
     try{
-      res.locals.allEmployees= await Employess.find({})
+      res.locals.allEmployees= await Employee.find({})
       res.render('employees');
     }catch(err){
       console.log('Error in  employee')
@@ -173,25 +168,52 @@ router.get('/',
 
 });
 
-
-router.post('/',
-
+app.get('/employerRouter',
+  //isLoggedIn,
   async (req, res, next) => {
-      const employees = new Employee(
-        { name:req.body.name,
-          schoolGraduatedFrom:req.body.schoolGraduatedFrom,
-         linkdinLink:req.body.linkdinLink,
-          picture:req.body.picture,
-          yearGraduated:req.body.yearGraduated,
-          skills:req.body.skills,
-          userId :req.user._id,
-          EmployerMatches: req.body.matches
-        })
-      await employees.save();
-      //res.render("todoVerification")
-      res.redirect('/employees')
+    try{
+      res.locals.allEmployees= await Employer.find({})
+      res.render('employees');
+    }catch(err){
+      console.log('Error in  employee')
+            console.dir(err)
+            next(err)
+    }
+
 });
-*/
+
+app.get('/employerRouter',
+  //isLoggedIn,
+  async (req, res, next) => {
+    try{
+      res.locals.allEmployers= await Employer.find({})
+      res.render('employers');
+    }catch(err){
+      console.log('Error in  employer')
+            console.dir(err)
+            next(err)
+    }
+
+});
+
+
+// router.post('/',
+//   async (req, res, next) => {
+//       const employees = new Employee(
+//         { name:req.body.name,
+//           schoolGraduatedFrom:req.body.schoolGraduatedFrom,
+//          linkdinLink:req.body.linkdinLink,
+//           picture:req.body.picture,
+//           yearGraduated:req.body.yearGraduated,
+//           skills:req.body.skills,
+//           userId :req.user._id,
+//           EmployerMatches: req.body.matches
+//         })
+//       await employees.save();
+//       //res.render("todoVerification")
+//       res.redirect('/employees')
+// });
+
 
 app.use(function(req, res, next) {
   next(createError(404));
