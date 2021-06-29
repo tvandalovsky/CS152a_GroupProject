@@ -12,12 +12,31 @@
     <input type="submit" value="Submit">
   </form>
 
+
 <% if (loggedIn) { %>
-  <%= user.googlename  %> sign up as an employer or employee
-  <form method="post" action="/employeeEmployeer" class="bg-info">
-    Would you like to sign up as an employeer or employee?<br>
-          Employer <input type="radio" name="isEmployee" value="false"><br>
-          Employee <input type="radio" name="isEmployee" value="true"><br>
-            <input type="submit" value="Submit">
-  </form>
+
+   <% if (user.isEmployee == null) { %>
+    <%= user.googlename  %> sign up as an employer or employee
+    <form method="post" action="/employeeEmployeer" class="bg-info">
+      Would you like to sign up as an employeer or employee?<br>
+            Employer <input type="radio" name="isEmployee" value="false"><br>
+            Employee <input type="radio" name="isEmployee" value="true"><br>
+              <input type="submit" value="Submit">
+    </form>
+  <% }   %>
+<% } %>
+
+
+<% if (loggedIn && user.isEmployee != null) { %>
+
+   <% if (user.isEmployee) { %>
+    <%= user.googlename  %> Fill out your employee information:
+         <a class="nav-link" href="/employeeRouter" > Employee Info </a>
+  <% }   %>
+
+  <% if (!user.isEmployee) { %>
+   <%= user.googlename  %> Fill out your employee information:
+        <a class="nav-link" href="/employerRouter" > Employer Info </a>
+ <% }   %>
+
 <% } %>
