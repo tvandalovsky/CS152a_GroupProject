@@ -52,31 +52,39 @@ app.get("/about", (request, response) => {
   response.render("about");
 });
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
+
+app.post("/tester", (request,response) => {
+  response.render("login")
+});
+
+app.get('/login', (request,response) => {
+  response.render("views/matches.ejs")
 });
 
 app.post('/employeeEmployeer',
-    async (req,res,next) => {
-      try {
-        let isEmployee = req.body.isEmployee
-        if(isEmployee.equals === "true"){
-          req.user.isEmployee = true
-            await req.user.save()
-          res.redirect('/login')
-        }
-        else {
-          req.user.isEmployee = false
-          await req.user.save()
-          res.redirect('/login')
-        }
-
-      } catch (error) {
-        next(error)
-      }
-    });
-
+async (req,res,next) => {
+  try {
+    let isEmployee = req.body.isEmployee
+    if(isEmployee === 'true'){
+      req.user.isEmployee = isEmployee
+      await req.user.save()
+      console.log(req.user.isEmployee);
+      res.render('employees')
+    }
+    else if(isEmployee === 'false') {
+      req.user.isEmployee = isEmployee
+      await req.user.save()
+      console.log(req.user.isEmployee);
+      res.render('employer')
+    }
+  } catch (error) {
+    next(error)
+  }
+});
+//catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
+});
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
