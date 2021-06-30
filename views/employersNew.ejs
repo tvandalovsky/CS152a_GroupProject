@@ -28,13 +28,13 @@
           </a>
         </td>
         <td>
-            <%= employerNew.positionLookingFor %>  
+            <%= employerNew.positionLookingFor %>
         </td>
         <td>
-            <%= employerNew.salaryEstimate %>  
+            <%= employerNew.salaryEstimate %>
         </td>
         <td>
-            <%= employerNew.EmployeeMatches %>  
+            <%= employerNew.EmployeeMatches %>
 
 
         </td>
@@ -48,7 +48,35 @@
     <a href="/">Add another piece of information</a><br>
     <a href="/employeesNew">Check Employees Info</a>
 
+    <div class="bg-light" >
+        <div class="jumbotron">
+            <h1>Major Employeer information</h1>
+            <h3> Employee information
+             </h3>``
+        </div>
 
-   
+        <% for(let i=0; i<employersNew.length; i++){
+            employerNew = employersNew[i] %>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Company Websites
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><a class="dropdown-item" href="<%= employerNew.companyWebsiteLink%>"> Hello</a></li>
+                </ul>
+            <%  } %>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 <%- include('bootfooter') -%>
