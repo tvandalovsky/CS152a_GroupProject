@@ -52,6 +52,13 @@ app.get("/about", (request, response) => {
   response.render("about");
 });
 
+app.get("/aboutMajorEmployeers", (request, response) => {
+  response.render("/aboutMajorEmployeers");
+});
+
+app.get("/aboutEmployee", (request, response) => {
+  response.render("/aboutEmployee");
+});
 
 app.post("/tester", (request,response) => {
   response.render("login")
