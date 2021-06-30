@@ -60,6 +60,12 @@ app.get("/aboutEmployee", (request, response) => {
   response.render("/aboutEmployee");
 });
 
+app.get("/test", (request, response) => {
+  response.render("test");
+});
+
+
+
 app.post("/tester", (request,response) => {
   response.render("login")
 });
@@ -149,8 +155,8 @@ app.post("/employeeNew",
                       console.log(typeof(employerNew._id))
                 }
           })
-      
-          
+
+
     }
 
 
@@ -180,7 +186,7 @@ async (req,res,next) => {
   await EmployeeNew.deleteOne({_id:employeeNew_id })
   await EmployerNew.updateMany({},{$pull:{EmployeeMatches: employeeNew_id}});
 
-  
+
   res.redirect('/employeesNew')
 
 })
@@ -245,9 +251,9 @@ app.post("/employerNew",
     res.redirect('/employersNew')
 
 
-    
-    
-    
+
+
+
 })
 
 
@@ -268,7 +274,7 @@ app.get('/employerNewremove/:employerNew_id', isLoggedIn,
   await EmployeeNew.updateMany({},{$pull:{EmployerMatches: employerNew_id}});
   res.redirect('/employersNew')
 
-  
+
 })
 
 
