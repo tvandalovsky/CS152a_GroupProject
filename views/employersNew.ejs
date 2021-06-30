@@ -1,0 +1,54 @@
+<%- include('bootheader') -%>
+
+<div class="bg-light" >
+  <div class="jumbotron">
+
+    <h2>List of all employers  </h2>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Delete</th><th>_ID</th>
+          <th>EmployerName</th><th>CompanyName</th>
+          <th>Positions LookingFor</th><th>Salary Estimate($)</th>
+          <th>Potential Employees</th>
+        </tr>
+      </thead>
+      <tbody>
+    <% for(let i=0; i<employersNew.length; i++){
+        employerNew = employersNew[i]
+        console.log(`i=${i} document=${employerNew}`)
+    %>
+      <tr>
+        <td><a href="/employerNewremove/<%= employerNew._id %>"> X </a></td>
+        <td><%= employerNew._id %></td>
+        <td><%= employerNew.employerName %></td>
+        <td> <!-- click on company Name to get company's logo  -->
+          <a href="<%=employerNew.companyWebsiteLink%>">
+            <%= employerNew.companyName %>
+          </a>
+        </td>
+        <td>
+            <%= employerNew.positionLookingFor %>  
+        </td>
+        <td>
+            <%= employerNew.salaryEstimate %>  
+        </td>
+        <td>
+            <%= employerNew.EmployeeMatches %>  
+
+
+        </td>
+      </tr>
+    <%}%>
+    </tbody>
+    </table>
+
+    <hr>
+
+    <a href="/">Add another piece of information</a><br>
+    <a href="/employeesNew">Check Employees Info</a>
+
+
+   
+
+<%- include('bootfooter') -%>

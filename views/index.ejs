@@ -3,31 +3,45 @@
 <div class="bg-light" >
     <div class="jumbotron"> <br>
         <h1> </h1>
-        <h3> app routing works </h3>
+        <h3> app routing works </h3><br>
 
     </div>
 </div>
 
-  <form method="post" action="/tester" class="bg-danger">
+  <!-- <form method="post" action="/tester" class="bg-danger">
     <input type="submit" value="Submit">
-  </form>
+  </form> -->
 
 
-<% if (loggedIn) { %>
+<!-- <% if (loggedIn) { %> -->
 
-   <% if (user.isEmployee == null) { %>
-    <%= user.googlename  %> sign up as an employer or employee
+   <!-- <% if (user.isEmployee == null) { %> -->
+    <!-- <%= user.googlename  %> sign up as an employer or employee
     <form method="post" action="/employeeEmployeer" class="bg-info">
       Would you like to sign up as an employeer or employee?<br>
             Employer <input type="radio" name="isEmployee" value="false"><br>
             Employee <input type="radio" name="isEmployee" value="true"><br>
               <input type="submit" value="Submit">
-    </form>
-  <% }   %>
-<% } %>
+    </form> -->
+  <!-- <% }   %> -->
+<!-- <% } %> -->
+
+<% if (loggedIn) {%>
+   <h5>
+      Welcome <%=user.googlename %>! 
+   </h5>
+   Please add employer or employee info
+   <form method="post" action="/employeeEmployeer" class="bg-info">
+    Would you like to sign up as an employeer or employee?<br>
+          Employer <input type="radio" name="isEmployee" value="false"><br>
+          Employee <input type="radio" name="isEmployee" value="true"><br>
+            <input type="submit" value="Submit">
+  </form>
+
+  <% } %>
 
 
-<% if (loggedIn && user.isEmployee != null) { %>
+<!-- <% if (loggedIn && user.isEmployee != null) { %>
 
    <% if (user.isEmployee) { %>
     <%= user.googlename  %> Fill out your employee information:
@@ -37,6 +51,6 @@
   <% if (!user.isEmployee) { %>
    <%= user.googlename  %> Fill out your employee information:
         <a class="nav-link" href="/employerRouter" > Employer Info </a>
- <% }   %>
+ <% }   %> -->
 
 <% } %>

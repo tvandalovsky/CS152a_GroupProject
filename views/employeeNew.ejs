@@ -1,0 +1,21 @@
+<%- include('bootheader') -%>
+
+<div class="bg-light" >
+    <div class="jumbotron">
+        <h1>Employees</h1>
+        <h3> Employee information
+         </h3>
+    </div>
+    <form method="post" action="/employeeNew">
+      <input type="text" name="employeeName" size="100"> Employee Name <br>
+      <input type="text" name="schoolGrauatedFrom" size="100"> School graduate from<br>
+      <input type="text" name="linkdinLink" size="100"> Linkdin Link<br>
+      <input type="text" name="picture" size="100"> Picture<br>
+      <input type="text" name="desiredPosition" size="100"> Desired Position<br>
+      <input type="number" name="yearGraduated" size="100"> Enter the year you graduated<br>
+      <input type="text" name="skills" size="100"> Skills<br>
+      <input type="submit" value="Submit (Employee)">
+    </form>
+   
+
+<%- include('bootfooter') -%>

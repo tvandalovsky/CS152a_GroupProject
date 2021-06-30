@@ -1,0 +1,59 @@
+<%- include('bootheader') -%>
+
+<div class="bg-light" >
+  <div class="jumbotron">
+
+    <h2>List of all employees  </h2>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Delete</th> <th>_ID</th>
+          <th>EmployeeName</th><th>SchoolGraduatedFrom</th><th>LinkdinLink</th>
+          <th>Desired Position</th><th>Graduation Year</th><th>Skills</th>
+          <th>Potential Employers</th>
+        </tr>
+      </thead>
+      <tbody>
+    <% for(let i=0; i<employeesNew.length; i++){
+        employeeNew = employeesNew[i]
+        console.log(`i=${i} document=${employeeNew}`)
+    %>
+      <tr>
+        <td><a href="/employeeNewremove/<%= employeeNew._id %>"> X </a></td>
+        <td><%= employeeNew._id %></td>
+        <td> <!-- click on employeeName to get employee's picture  -->
+          <a href="<%=employeeNew.picture%>">
+            <%= employeeNew.employeeName %>
+          </a>
+        </td>
+        <td><%= employeeNew.schoolGraduatedFrom %></td>
+        <td>
+            <%= employeeNew.linkdinLink %>  
+        </td>
+        <td>
+            <%= employeeNew.desiredPosition %>  
+        </td>
+        <td>
+            <%= employeeNew.yearGraduated %>  
+        </td>
+        <td>
+            <%= employeeNew.skills %>  
+        </td>
+        <td>
+           <%= employeeNew.EmployerMatches %>  
+ 
+        </td>
+      </tr>
+    <%}%>
+    </tbody>
+    </table>
+
+    <hr>
+
+    <a href="/">Add another piece of information</a> <br>
+    <a href="/employersNew">Check Employers Info</a>
+
+
+   
+
+<%- include('bootfooter') -%>

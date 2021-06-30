@@ -66,34 +66,208 @@ app.get('/employeeGet', (req,res) => {
 });
 
 app.get('/employerGet', (req,res) => {
-  res.render("employers")
+  res.render("employer")
 });
 
 
+const EmployeeNew = require('./models/EmployeeNew');
+const EmployerNew = require('./models/EmployerNew');
+
 app.post('/employeeEmployeer',
-async (req,res,next) => {
+  isLoggedIn,
+  async (req,res,next) => {
   try {
-    let isEmployee = req.body.isEmployee
+     const isEmployee = req.body.isEmployee
+     res.locals.isEmployee = isEmployee;
     if(isEmployee === 'true'){
-      req.user.isEmployee = isEmployee
-      await req.user.save()
-      console.log(req.user.isEmployee);
-      res.locals.employees = await User.find({isEmployee:true});
-      console.log('employees length='+JSON.stringify(res.locals.employees.length));
-      res.render('employees')
+      console.log('The current user is employee');
+      // res.locals.employees = await EmployeeNew.find({})
+      // console.log('employees length='+JSON.stringify(res.locals.employees.length));
+      res.render('employeeNew')
     }
     else if(isEmployee === 'false') {
-      req.user.isEmployee = isEmployee
-      await req.user.save()
-      console.log(req.user.isEmployee);
-      res.locals.employers = await User.find({isEmployee:false});
-      console.log('employers length='+JSON.stringify(res.locals.employers.length));
-      res.render('employer')
+      console.log('The current user is employer');
+      // res.locals.employers = await User.find({isEmployee:false});
+      // console.log('employers length='+JSON.stringify(res.locals.employers.length));
+      res.render('employerNew')
     }
   } catch (error) {
     next(error)
   }
 });
+
+app.post("/employeeNew",
+  isLoggedIn,
+  async (req,res,next) => {
+
+    const employeeName = req.body.employeeName
+    const schoolGraduatedFrom = req.body.schoolGrauatedFrom
+    const linkdinLink = req.body.linkdinLink
+    const picture = req.body.picture
+    const desiredPosition = req.body.desiredPosition
+    const yearGraduated = req.body.yearGraduated
+    const skills = req.body.skills
+    const EmployerMatches = [];
+
+    res.locals.employersNew = await EmployerNew.find({});
+    const employersNewTemp = await EmployerNew.find({});
+    console.log('employersNew='+JSON.stringify(res.locals.employersNew.length))
+    console.log('typeof length ' + typeof(parseInt((JSON.stringify(res.locals.employersNew.length)))));
+    const employersNewLength = parseInt(JSON.stringify(res.locals.employersNew.length));
+
+
+    const employeeInfo = new EmployeeNew({
+      employeeName:employeeName,
+      schoolGraduatedFrom:schoolGraduatedFrom,
+      linkdinLink:linkdinLink,
+      picture:picture,
+      desiredPosition:desiredPosition,
+      linkdinLink:linkdinLink,
+      yearGraduated:yearGraduated,
+      skills:skills,
+      EmployerMatches:[],
+    })
+
+    const currPostion = employeeInfo.desiredPosition
+
+    if (employersNewLength !=0) {
+        console.log('INside pushing')
+
+          employersNewTemp.forEach(employerNew => {
+               if(employerNew.positionLookingFor == currPostion) {
+                      employeeInfo.EmployerMatches.push(employerNew._id);
+                      console.log("Matches Emplyer's id");
+                      console.log(employerNew._id);
+                      console.log('Typd of EmplyerNew.id')
+                      console.log(typeof(employerNew._id))
+                }
+          })
+      
+          
+    }
+
+
+
+    const result = await employeeInfo.save();
+    await EmployerNew.updateMany({positionLookingFor:currPostion},{$addToSet:{EmployeeMatches: employeeInfo._id}});
+    console.log('result=')
+    console.dir(result)
+    res.redirect('/employeesNew')
+})
+
+
+app.get('/employeesNew', isLoggedIn,
+  async (req,res,next) => {
+    res.locals.employeesNew = await EmployeeNew.find({})
+    console.log('employees='+JSON.stringify(res.locals.employeesNew.length))
+    res.render('employeesNew')
+  })
+
+
+
+app.get('/employeeNewremove/:employeeNew_id', isLoggedIn,
+async (req,res,next) => {
+
+  const employeeNew_id = req.params.employeeNew_id
+  console.log(`id=${employeeNew_id}`)
+  await EmployeeNew.deleteOne({_id:employeeNew_id })
+  await EmployerNew.updateMany({},{$pull:{EmployeeMatches: employeeNew_id}});
+
+  
+  res.redirect('/employeesNew')
+
+})
+
+
+// Here comes the Employer Section
+app.post("/employerNew",
+  isLoggedIn,
+  async (req,res,next) => {
+
+    const employerName = req.body.employerName
+    const companyName = req.body.companyName
+    const companyWebsiteLink= req.body.companyWebsiteLink
+    const logo= req.body.logo
+    const positionLookingFor = req.body.positionLookingFor
+    const salaryEstimate = req.body.salaryEstimate
+    const EmployeeMatches = [];
+
+    res.locals.employeesNew = await EmployeeNew.find({});
+    const employeesNewTemp = await EmployeeNew.find({});
+    console.log('employeesNew='+JSON.stringify(res.locals.employeesNew.length))
+    console.log('typeof length ' + typeof(parseInt((JSON.stringify(res.locals.employeesNew.length)))));
+    const employeesNewLength = parseInt(JSON.stringify(res.locals.employeesNew.length));
+
+
+
+    const employerInfo = new EmployerNew({
+      employerName:employerName,
+      companyName:companyName,
+      companyWebsiteLink:companyWebsiteLink,
+      logo:logo,
+      positionLookingFor:positionLookingFor,
+      salaryEstimate:salaryEstimate,
+      EmployeeMatches:[],
+
+    })
+
+
+
+    const currPostion = employerInfo.positionLookingFor
+
+
+    if (employeesNewLength !=0) {
+        console.log('INside pushing')
+
+          employeesNewTemp.forEach(employeeNew => {
+               if(employeeNew.desiredPosition == currPostion) {
+                      employerInfo.EmployeeMatches.push(employeeNew._id);
+                      console.log("Matches Emplyee's id");
+                      console.log(employeeNew._id);
+                      console.log('Type of EmplyeeNew.id')
+                      console.log(typeof(employeeNew._id))
+                }
+          })
+    }
+
+
+    const result = await employerInfo.save();
+    await EmployeeNew.updateMany({desiredPosition:currPostion},{$addToSet:{EmployerMatches: employerInfo._id}});
+    console.log('result=')
+    console.dir(result)
+    res.redirect('/employersNew')
+
+
+    
+    
+    
+})
+
+
+app.get('/employersNew', isLoggedIn,
+  async (req,res,next) => {
+    res.locals.employersNew = await EmployerNew.find({})
+    console.log('employers='+JSON.stringify(res.locals.employersNew.length))
+    res.render('employersNew')
+  })
+
+
+app.get('/employerNewremove/:employerNew_id', isLoggedIn,
+  async (req,res,next) => {
+
+  const employerNew_id = req.params.employerNew_id
+  console.log(`id=${employerNew_id}`)
+  await EmployerNew.deleteOne({_id:employerNew_id })
+  await EmployeeNew.updateMany({},{$pull:{EmployerMatches: employerNew_id}});
+  res.redirect('/employersNew')
+
+  
+})
+
+
+
+
+
 
 app.post('/matchWith',
 async (req,res,next) => {
@@ -215,6 +389,9 @@ app.get('/employerRouter',
 // });
 
 
+
+
+
 app.use(function(req, res, next) {
   next(createError(404));
 });
@@ -228,8 +405,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-
 
 
 module.exports = app;

@@ -1,0 +1,20 @@
+<%- include('bootheader') -%>
+
+<div class="bg-light" >
+    <div class="jumbotron">
+        <h1>Employers</h1>
+        <h3> Employer information
+         </h3>
+    </div>
+    <form method="post" action="/employerNew">
+      <input type="text" name="employerName" size="100"> Employer Name <br>
+      <input type="text" name="companyName" size="100"> Company Name <br>
+      <input type="text" name="companyWebsiteLink" size="100"> Website Link<br>
+      <input type="text" name="logo" size="100"> Logo Link<br>
+      <input type="text" name="positionLookingFor" size="100"> Positions LookingFor<br>
+      <input type="number" name="salaryEstimate" size="100"> Salary Estimate($)<br>
+      <input type="submit" value="Submit (Employer)">
+    </form>
+   
+
+<%- include('bootfooter') -%>
