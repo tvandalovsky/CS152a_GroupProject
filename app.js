@@ -117,6 +117,7 @@ app.post("/employeeNew",
     const schoolGraduatedFrom = req.body.schoolGrauatedFrom
     const linkdinLink = req.body.linkdinLink
     const picture = req.body.picture
+    const employeeEmail = req.body.employeeEmail
     const desiredPosition = req.body.desiredPosition
     const yearGraduated = req.body.yearGraduated
     const skills = req.body.skills
@@ -134,6 +135,7 @@ app.post("/employeeNew",
       schoolGraduatedFrom:schoolGraduatedFrom,
       linkdinLink:linkdinLink,
       picture:picture,
+      employeeEmail: employeeEmail,
       desiredPosition:desiredPosition,
       linkdinLink:linkdinLink,
       yearGraduated:yearGraduated,
@@ -200,6 +202,7 @@ app.post("/employerNew",
     const employerName = req.body.employerName
     const companyName = req.body.companyName
     const companyWebsiteLink= req.body.companyWebsiteLink
+    const employerEmail = req.body.employerEmail
     const logo= req.body.logo
     const positionLookingFor = req.body.positionLookingFor
     const salaryEstimate = req.body.salaryEstimate
@@ -217,11 +220,11 @@ app.post("/employerNew",
       employerName:employerName,
       companyName:companyName,
       companyWebsiteLink:companyWebsiteLink,
+      employerEmail: employerEmail,
       logo:logo,
       positionLookingFor:positionLookingFor,
       salaryEstimate:salaryEstimate,
       EmployeeMatches:[],
-
     })
 
 

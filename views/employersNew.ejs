@@ -18,8 +18,8 @@
       <thead>
         <tr>
           <th>Delete</th><th>_ID</th>
-          <th>EmployerName</th><th>CompanyName</th>
-          <th>Positions LookingFor</th><th>Salary Estimate($)</th>
+          <th>EmployerName</th> <th>Email</th> <th>Company Name</th>
+          <th>Positions Looking For</th><th>Salary Estimate($)</th>
           <th>Potential Employees</th>
         </tr>
       </thead>
@@ -32,6 +32,7 @@
         <td><a href="/employerNewremove/<%= employerNew._id %>"> X </a></td>
         <td><%= employerNew._id %></td>
         <td><%= employerNew.employerName %></td>
+        <td> <a href="mailto:<%= employerNew.employerEmail%>"> <%= employerNew.employerEmail%> </a> </td>
         <td> <!-- click on company Name to get company's logo  -->
           <a href="<%=employerNew.companyWebsiteLink%>">
             <%= employerNew.companyName %>
@@ -65,7 +66,7 @@
              </h3>``
         </div>
 
-        
+
 
 <br>
 <%- include('bootfooter') -%>

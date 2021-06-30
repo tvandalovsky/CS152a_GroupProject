@@ -9,8 +9,9 @@
         <tr>
           <th>Delete</th> <th>_ID</th>
           <th>EmployeeName</th><th>SchoolGraduatedFrom</th><th>LinkdinLink</th>
+          <th>Email</th>
           <th>Desired Position</th><th>Graduation Year</th><th>Skills</th>
-          <th>Potential Employers</th>
+          <th>Potential Employers</th><th> Tester> </th>
         </tr>
       </thead>
       <tbody>
@@ -31,6 +32,9 @@
             <%= employeeNew.linkdinLink %>
         </td>
         <td>
+            <%= employeeNew.employeeEmail %>
+        </td>
+        <td>
             <%= employeeNew.desiredPosition %>
         </td>
         <td>
@@ -43,6 +47,9 @@
            <%= employeeNew.EmployerMatches %>
 
         </td>
+        <td>
+
+       </td>
       </tr>
     <%}%>
     </tbody>

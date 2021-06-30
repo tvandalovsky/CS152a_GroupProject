@@ -8,6 +8,7 @@ var employerNewSchema = Schema( {
   employerName:String,
   companyName: String,
   companyWebsiteLink: String,
+  employerEmail: String,
   logo:String,
   positionLookingFor:String,
   salaryEstimate:Number,
