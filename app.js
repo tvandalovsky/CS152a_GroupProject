@@ -56,6 +56,10 @@ app.get("/aboutMajorEmployeers", (request, response) => {
   response.render("/aboutMajorEmployeers");
 });
 
+app.get("/aboutEmployee", (request, response) => {
+  response.render("/aboutEmployee");
+});
+
 app.post("/tester", (request,response) => {
   response.render("login")
 });
