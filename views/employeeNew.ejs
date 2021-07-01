@@ -15,6 +15,11 @@
       <input type="text" name="desiredPosition" size="100"> Desired Position<br>
       <input type="number" name="yearGraduated" size="100"> Enter the year you graduated<br>
       <input type="text" name="skills" size="100"> Skills<br>
+      <% for(let i=0; i<employeesNew.length; i++){
+          employeeNew = employeesNew[i]
+          console.log(`i=${i} document=${employeeNew}`)
+      %>
+       <input type="hidden" id="employerMatch" name="employerMatch" value="<%=employeeNew.EmployerMatches%>">
       <input type="submit" value="Submit (Employee)">
     </form>
 
