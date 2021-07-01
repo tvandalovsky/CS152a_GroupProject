@@ -3,7 +3,7 @@
 <div class="bg-light" >
   <div class="jumbotron">
 
-    <h2>List of all employees  </h2>
+    <h2>List of all employees</h2>
     <table class="table table-bordered table-striped">
       <thead>
         <tr>
@@ -49,17 +49,10 @@
         <%  }); %>
        </td>
         <td>
-           <%= employeeNew.EmployerMatches %>
+           <%employeeNew.EmployerMatches.forEach(function (item) { %>
+             <%= item %>
+           <%  }); %>
         </td>
-
-        <td>
-           <%= employeeNew.employerEmail%>
-
-        </td>
-        <td>
-
-       </td>
-
       </tr>
     <%}%>
     </tbody>

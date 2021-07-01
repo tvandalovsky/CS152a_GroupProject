@@ -34,10 +34,14 @@
             <%= employerNew.salaryEstimate %>
         </td>
         <td>
-            <%= employerNew.EmployeeMatchesEmails %>
+          <%employerNew.EmployeeMatchesEmails.forEach(function (item) { %>
+          <a href="mailto:<%=item%>"> <%= item %></a>
+          <%  }); %>
         </td>
         <td>
-            <%= employerNew.EmployeeMatches %>
+            <%employerNew.EmployeeMatches.forEach(function (item) { %>
+              <%= item %>
+            <%  }); %>
         </td>
       </tr>
     <%}%>
