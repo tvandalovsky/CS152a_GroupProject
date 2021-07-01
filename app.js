@@ -64,6 +64,9 @@ app.get("/test", (request, response) => {
   response.render("test");
 });
 
+app.get("/emptest", (request, response) => {
+  response.render("employeeNew");
+});
 
 
 app.post("/tester", (request,response) => {
@@ -194,8 +197,6 @@ async (req,res,next) => {
   //await EmployeeNew.deleteOne({employeeEmail:employeeNew_id })
   await EmployerNew.updateMany({},{$pull:{EmployeeMatches: employeeNew_id}});
   //await EmployerNew.updateMany({},{$pull:{EmployeeMatchesEmails: employeeEmail}});
-
-
   res.redirect('/employeesNew')
 
 })
