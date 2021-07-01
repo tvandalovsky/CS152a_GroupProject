@@ -7,7 +7,7 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 var employeeNewSchema = Schema( {
   employeeName: String,
   schoolGraduatedFrom: String,
-  employeeEmail:String, 
+  employeeEmail:String,
   linkdinLink: String,
   picture: String,
   desiredPosition: String,
@@ -20,6 +20,13 @@ var employeeNewSchema = Schema( {
         {
             type:ObjectId,
             ref:"EmployerNew"
+        }
+    ],
+  EmployerMatchesEmails:
+    [
+        {
+            type:String,
+            ref:"EmployerNewEmails"
         }
     ]
 });

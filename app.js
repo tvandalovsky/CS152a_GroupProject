@@ -122,6 +122,7 @@ app.post("/employeeNew",
     const yearGraduated = req.body.yearGraduated
     const skills = req.body.skills
     const EmployerMatches = [];
+    const EmployerMatchesEmails = [];
 
     res.locals.employersNew = await EmployerNew.find({});
     const employersNewTemp = await EmployerNew.find({});
@@ -141,16 +142,20 @@ app.post("/employeeNew",
       yearGraduated:yearGraduated,
       skills:skills,
       EmployerMatches:[],
+      EmployerMatchesEmails: []
     })
 
     const currPostion = employeeInfo.desiredPosition
 
     if (employersNewLength !=0) {
-        console.log('INside pushing')
+        console.log('Inside pushing and Emails')
 
           employersNewTemp.forEach(employerNew => {
                if(employerNew.positionLookingFor == currPostion) {
-                      employeeInfo.EmployerMatches.push(employerNew._id);
+                      employeeInfo.EmployerMatches.push(employerNew._id); //for id
+                      console.log(employerNew.employerEmail); //for email
+                      console.log(typeof(employerNew.employerEmail)); //for email
+                      employeeInfo.EmployerMatchesEmails.push(employerNew.employerEmail); //for email
                       console.log("Matches Emplyer's id");
                       console.log(employerNew._id);
                       console.log('Typd of EmplyerNew.id')
@@ -161,10 +166,9 @@ app.post("/employeeNew",
 
     }
 
-
-
     const result = await employeeInfo.save();
     await EmployerNew.updateMany({positionLookingFor:currPostion},{$addToSet:{EmployeeMatches: employeeInfo._id}});
+    await EmployerNew.updateMany({positionLookingFor:currPostion},{$addToSet:{EmployeeMatchesEmails: employeeInfo.employeeEmail}});
     console.log('result=')
     console.dir(result)
     res.redirect('/employeesNew')
@@ -184,9 +188,12 @@ app.get('/employeeNewremove/:employeeNew_id', isLoggedIn,
 async (req,res,next) => {
 
   const employeeNew_id = req.params.employeeNew_id
+  //const employeeEmail = req.params.employeeNew_Email
   console.log(`id=${employeeNew_id}`)
   await EmployeeNew.deleteOne({_id:employeeNew_id })
+  //await EmployeeNew.deleteOne({employeeEmail:employeeNew_id })
   await EmployerNew.updateMany({},{$pull:{EmployeeMatches: employeeNew_id}});
+  //await EmployerNew.updateMany({},{$pull:{EmployeeMatchesEmails: employeeEmail}});
 
 
   res.redirect('/employeesNew')
@@ -207,6 +214,7 @@ app.post("/employerNew",
     const positionLookingFor = req.body.positionLookingFor
     const salaryEstimate = req.body.salaryEstimate
     const EmployeeMatches = [];
+    const EmployeeMatchesEmails = [];
 
     res.locals.employeesNew = await EmployeeNew.find({});
     const employeesNewTemp = await EmployeeNew.find({});
@@ -225,6 +233,7 @@ app.post("/employerNew",
       positionLookingFor:positionLookingFor,
       salaryEstimate:salaryEstimate,
       EmployeeMatches:[],
+      EmployeeMatchesEmails: []
     })
 
 
@@ -233,11 +242,13 @@ app.post("/employerNew",
 
 
     if (employeesNewLength !=0) {
-        console.log('INside pushing')
+        console.log('Inide pushing')
 
           employeesNewTemp.forEach(employeeNew => {
                if(employeeNew.desiredPosition == currPostion) {
                       employerInfo.EmployeeMatches.push(employeeNew._id);
+                      employerInfo.EmployeeMatchesEmails.push(employeeNew.employerEmails);
+                      employerInfo.Employee
                       console.log("Matches Emplyee's id");
                       console.log(employeeNew._id);
                       console.log('Type of EmplyeeNew.id')
@@ -249,6 +260,7 @@ app.post("/employerNew",
 
     const result = await employerInfo.save();
     await EmployeeNew.updateMany({desiredPosition:currPostion},{$addToSet:{EmployerMatches: employerInfo._id}});
+    await EmployeeNew.updateMany({desiredPosition:currPostion},{$addToSet:{EmployerMatchesEmails: employerInfo.employerEmail}});
     console.log('result=')
     console.dir(result)
     res.redirect('/employersNew')
@@ -272,9 +284,13 @@ app.get('/employerNewremove/:employerNew_id', isLoggedIn,
   async (req,res,next) => {
 
   const employerNew_id = req.params.employerNew_id
+  //const employerEmail = req.params.employerNew_email
   console.log(`id=${employerNew_id}`)
+  //console.log(`id=${employerNew_email}`)
   await EmployerNew.deleteOne({_id:employerNew_id })
+  //await EmployerNew.deleteOne({employerEmail:employerNew_id })
   await EmployeeNew.updateMany({},{$pull:{EmployerMatches: employerNew_id}});
+//  await EmployeeNew.updateMany({},{$pull:{EmployerMatchesEmails: employerEmail}});
   res.redirect('/employersNew')
 
 
