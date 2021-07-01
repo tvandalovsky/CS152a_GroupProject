@@ -19,7 +19,14 @@ var employerNewSchema = Schema( {
         type: ObjectId,
         ref: "EmployeeNew"
       }
-    ]
+    ],
+  EmployeeMatchesEmails:
+      [
+          {
+              type: String,
+              ref:"EmployeeNewEmails"
+          }
+      ]
 } );
 
 module.exports = mongoose.model( 'EmployerNew', employerNewSchema );

@@ -1,15 +1,4 @@
 <%- include('bootheader') -%>
-
-<div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Dropdown button
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">Action</a>
-    <a class="dropdown-item" href="#">Another action</a>
-    <a class="dropdown-item" href="#">Something else here</a>
-  </div>
-</div>
 <div class="bg-light" >
   <div class="jumbotron">
 
@@ -18,9 +7,9 @@
       <thead>
         <tr>
           <th>Delete</th><th>_ID</th>
-          <th>EmployerName</th> <th>Email</th> <th>Company Name</th>
+          <th>Employer Name</th> <th>Email</th> <th>Company Name</th>
           <th>Positions Looking For</th><th>Salary Estimate($)</th>
-          <th>Potential Employees</th>
+          <th>Potential Employees Emails</th> <th> Potential Employees Ids </th>
         </tr>
       </thead>
       <tbody>
@@ -45,9 +34,10 @@
             <%= employerNew.salaryEstimate %>
         </td>
         <td>
+            <%= employerNew.EmployeeMatchesEmails %>
+        </td>
+        <td>
             <%= employerNew.EmployeeMatches %>
-
-
         </td>
       </tr>
     <%}%>
@@ -63,7 +53,7 @@
         <div class="jumbotron">
             <h1>Major Employeer information</h1>
             <h3> Employee information
-             </h3>``
+             </h3>
         </div>
 
 

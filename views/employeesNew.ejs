@@ -8,10 +8,10 @@
       <thead>
         <tr>
           <th>Delete</th> <th>_ID</th>
-          <th>EmployeeName</th><th>SchoolGraduatedFrom</th><th>LinkdinLink</th>
+          <th>Employee Name</th><th>Alma Mater </th><th>Linkdin Link</th>
           <th>Email</th>
           <th>Desired Position</th><th>Graduation Year</th><th>Skills</th>
-          <th>Potential Employers</th><th> Tester> </th>
+          <th>Potential Employers Emails</th><th> Potentioal Employers Ids </th>
         </tr>
       </thead>
       <tbody>
@@ -29,10 +29,10 @@
         </td>
         <td><%= employeeNew.schoolGraduatedFrom %></td>
         <td>
-            <%= employeeNew.linkdinLink %>
+          <a href="<%= employeeNew.linkdinLink %>"> <%= employeeNew.linkdinLink %> </a>
         </td>
         <td>
-            <%= employeeNew.employeeEmail %>
+          <a href="mailto:<%= employeeNew.employerEmail%>"> <%= employeeNew.employeeEmail %></a>
         </td>
         <td>
             <%= employeeNew.desiredPosition %>
@@ -44,12 +44,13 @@
             <%= employeeNew.skills %>
         </td>
         <td>
-           <%= employeeNew.EmployerMatches %>
-
-        </td>
-        <td>
-
+        <%employeeNew.EmployerMatchesEmails.forEach(function (item) { %>
+        <a href="mailto:<%=item%>"> <%= item %></a>
+        <%  }); %>
        </td>
+        <td>
+           <%= employeeNew.EmployerMatches %>
+        </td>
       </tr>
     <%}%>
     </tbody>
