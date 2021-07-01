@@ -248,11 +248,13 @@ app.post("/employerNew",
           employeesNewTemp.forEach(employeeNew => {
                if(employeeNew.desiredPosition == currPostion) {
                       employerInfo.EmployeeMatches.push(employeeNew._id);
-                      employerInfo.EmployeeMatchesEmails.push(employeeNew.employerEmails);
+                      employerInfo.EmployeeMatchesEmails.push(employeeNew.employeeEmails);
                       employerInfo.Employee
-                      console.log("Matches Emplyee's id");
+                      console.log("matches Employee's id");
+                      console.log(employeeNew.employeeEmails);
+                      console.log("Matches Employee's id");
                       console.log(employeeNew._id);
-                      console.log('Type of EmplyeeNew.id')
+                      console.log('Type of EmployeeNew.id')
                       console.log(typeof(employeeNew._id))
                 }
           })

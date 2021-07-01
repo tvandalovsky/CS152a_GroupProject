@@ -39,7 +39,9 @@
           <%  }); %>
         </td>
         <td>
-            <%= employerNew.EmployeeMatches %>
+            <%employerNew.EmployeeMatches.forEach(function (item) { %>
+              <%= item %>
+            <%  }); %>
         </td>
       </tr>
     <%}%>
