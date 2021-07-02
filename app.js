@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require( 'mongoose' );
+const axios = require("axios");
 const layouts = require("express-ejs-layouts");
 
 mongoose.connect( 'mongodb://localhost/authDemo');
@@ -299,8 +300,20 @@ app.get('/employerNewremove/:employerNew_id', isLoggedIn,
 
 })
 
-
-
+app.get("/dogAPI",
+  async (req,res,next) => {
+    try {
+      const url = "https://dog.ceo/api/breeds/image/random"
+      const result = await axios.get(url)
+      console.dir(result)
+      const dogimage = result.data.message
+      console.log(dogimage)
+      res.locals.dogimage = dogimage
+      res.render('dogAPI')
+    } catch(error){
+      next(error)
+    }
+})
 
 
 
