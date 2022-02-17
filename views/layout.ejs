@@ -16,18 +16,21 @@
     	<div id="nav">
     		<div class="col-sm nav-align">
     			<a href="/">
-    				<span class="button">Home</span>
+    				<span class="button"> Home </span>
     			</a>
     			<% if (!loggedIn) {%>
     			<a href="/auth/google">
-    				<span class="button">Login</span>
+    				<span class="button"> Login </span>
     			</a>
     			<% } else  { %>
     				Logged in as: <%= user.googleemail %>
     			<a href="/logout">
-    				<span class="button">Logout</span>
+    				<span class="button"> Logout </span>
     			</a>
     			<% } %>
+          <a href="/dogAPI">
+    				<span class="button">  Just a Dog API   </span>
+    			</a>
 
     		</div>
     	</div>
